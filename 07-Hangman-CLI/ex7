@@ -1,0 +1,45 @@
+import random
+words_to_guess = ["january","border","image","film","promise","kids","lungs","doll","rhyme","damage","plants",
+                    "chicken", "dog", "cat", "mouse", "frog"]
+word = random.choice(words_to_guess)
+und_lined=""
+count = 0
+correct_guess = ""
+guess=""
+und="_"
+guess_count=6
+guess_list = []
+for i in range(len(word)):
+    und_lined= und_lined + "_"
+print(und_lined)
+
+while guess_count!=0:
+    if und not in und_lined:
+        print("You did it !")
+        break
+    else:
+        print("Enter the Letter")
+        ltr = input()
+        x=ltr.isalpha()
+        if len(ltr) != 1 or x == False:
+            print("Length should be one and it should be an alphabet")
+            continue
+        if ltr in guess:
+            print('You are repeating the letter')
+            continue
+        if ltr not in guess:
+            guess = guess + ltr
+        guess_count-=1
+        guess_list.append(ltr)
+        guess_list.sort()
+        print(guess_list)
+        if ltr not in word:
+            print("Wrong Letter try again")
+        else:
+            guess_count +=1
+            correct_guess = correct_guess + ltr
+            for i in range(len(word)):
+                if word[i] in correct_guess:
+                    und_lined = und_lined[:i] + word[i] + und_lined[i+1:]
+            print(und_lined)
+print('Game Over')        
