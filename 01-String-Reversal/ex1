@@ -1,0 +1,6 @@
+def reverseWords(String):
+ 
+  return ' '.join(word[::-1] for word in String.split(" "))
+ 
+String = "Python is Awesome"
+print(reverseWords(String))   
