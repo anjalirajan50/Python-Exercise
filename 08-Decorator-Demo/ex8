@@ -1,0 +1,27 @@
+from functools import wraps
+import time
+
+def timethis(func):
+    @wraps(func)
+    def timethis_wrapper(*args, **kwargs):
+        start_time = time.perf_counter()
+        result = func(*args, **kwargs)
+        end_time = time.perf_counter()
+        total_time = end_time - start_time
+        print(f'Function {func.__name__}{args} {kwargs} Took {total_time:.4f} seconds')
+        return result
+    return timethis_wrapper
+
+
+@timethis
+def calculation(num):
+   
+    total = sum((x for x in range(0, num**2)))
+    return total
+
+if __name__ == '__main__':
+    calculation(10)
+    calculation(100)
+    calculation(1000)
+    calculation(5000)
+    calculation(10000)
